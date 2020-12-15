@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductMapper">
+
+	<!--  Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다.-->
+	<resultMap id="productMap" type="com.spring.wtm.model.Product">
+		<result property="id" column="id" />
+		<result property="img" column="img" />
+		<result property="name" column="name" />
+		<result property="eng" column="eng" />
+		<result property="price" column="price" />
+		<result property="qty" column="qty" />
+		<result property="desc" column="desc" />
+		<result property="spec" column="spec" />
+		<result property="delivery" column="delivery" />
+		<result property="category" column="category" />
+		<result property="regDate" column="reg_date" />
+		<result property="editDate" column="edit_date" />
+	</resultMap>
+	
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem" 
+		parameterType="com.spring.wtm.model.Product"
+		resultMap="productMap">
+		SELECT id, img, `name`, eng, price, qty, `desc`, spec, delivery, category FROM product WHERE id=#{id}
+	</select>
+	
+	<!-- 다중행 조회를 위한 기능 정의1 -->
+	<select id="selectList" 
+		parameterType="com.spring.wtm.model.Product"
+		resultMap="productMap">
+		SELECT id, img, `name`, eng, price, category 
+		FROM product
+		
+		<where>
+        	<if test="name != null and name != ''">
+                name LIKE concat('%', #{name}, '%')
+            </if>
+            
+            <if test="eng != null and eng != ''">
+                OR eng LIKE concat('%', #{eng}, '%')
+            </if>
+            
+            <if test="category != null and category != ''">
+				OR category LIKE concat('%', #{category}, '%')
+			</if>
+        </where>
+		
+		ORDER BY id DESC
+		
+		<if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+        
+	</select>
+	
+	<!-- 다중행 조회를 위한 기능 정의2 -->
+	<select id="selectList2" 
+		parameterType="com.spring.wtm.model.Product"
+		resultMap="productMap">
+		SELECT id, img, `name`, eng, price, qty, `desc`, spec, delivery, category FROM product
+		
+		<where>
+        	<if test="name != null and name != ''">
+                name LIKE concat('%', #{name}, '%')
+            </if>
+            
+            <if test="eng != null and eng != ''">
+                OR eng LIKE concat('%', #{eng}, '%')
+            </if>
+            
+            <if test="category != null and category != ''">
+				OR category LIKE concat('%', #{category}, '%')
+			</if>
+        </where>
+        
+	</select>
+	
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+    <select id="selectCountAll"
+        parameterType="com.spring.wtm.model.Product" 
+        resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        
+        <where>
+        	<if test="name != null and name != ''">
+                name LIKE concat('%', #{name}, '%')
+            </if>
+            
+            <if test="eng != null and eng != ''">
+                OR eng LIKE concat('%', #{eng}, '%')
+            </if>
+            
+            <if test="category != null and category != ''">
+				OR category LIKE concat('%', #{category}, '%')
+			</if>
+        </where>
+        
+    </select>
+	
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="com.spring.wtm.model.Product"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO product (
+			img, `name`, eng, price, qty, `desc`, spec, delivery, category, reg_date, edit_date
+		)	VALUES (
+			#{img}, #{name}, #{eng}, #{price}, #{qty}, #{desc}, #{spec}, #{delivery}, #{category}, now(), now()
+		)
+	</insert>
+	
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem" 
+    	parameterType="com.spring.wtm.model.Product">
+        DELETE FROM product WHERE id=#{id}
+    </delete>
+	
+</mapper>

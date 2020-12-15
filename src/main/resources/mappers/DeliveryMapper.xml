@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeliveryMapper">
+
+	<!--  Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다.-->
+	<resultMap id="deliveryMap" type="com.spring.wtm.model.Delivery">
+		<result property="id" column="id" />
+		<result property="receiver" column="receiver" />
+		<result property="tel" column="tel" />
+		<result property="postcode" column="postcode" />
+		<result property="address" column="address" />
+		<result property="detailAddress" column="detail_address" />
+		<result property="extraAddress" column="extra_address" />
+		<result property="memo" column="memo" />
+		<result property="orderPay" column="order_pay" />
+		<result property="regDate" column="reg_date" />
+		<result property="editDate" column="edit_date" />
+		<result property="memberId" column="member_id" />
+		<result property="orderId" column="order_id" />
+		<result property="userName" column="user_name" />
+		<result property="status" column="status" />
+		<result property="totalPrice" column="total_price" />
+	</resultMap>
+	
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem" 
+		parameterType="com.spring.wtm.model.Delivery" 
+		resultMap="deliveryMap">
+		
+		SELECT delivery.id, user_name, receiver, delivery.tel, delivery.postcode, delivery.address, delivery.detail_address, delivery.extra_address, memo, order_pay, total_price, delivery.reg_date, delivery.edit_date, delivery.member_id, order_id, status
+		FROM delivery
+		INNER JOIN `order` ON delivery.order_id = `order`.id
+		INNER JOIN member ON delivery.member_id = member.id
+		WHERE delivery.member_id = #{memberId} AND order_id=#{orderId}
+		
+	</select>
+		
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="com.spring.wtm.model.Delivery"
+		resultMap="deliveryMap">
+	
+		SELECT delivery.id, user_name, receiver, delivery.tel, delivery.postcode, delivery.address, delivery.detail_address, delivery.extra_address, memo, order_pay, total_price, DATE_FORMAT(delivery.reg_date, '%Y-%m-%d') AS  reg_date, delivery.edit_date, delivery.member_id, order_id, status
+		FROM delivery
+		INNER JOIN `order` ON delivery.order_id = `order`.id
+		INNER JOIN member ON delivery.member_id = member.id
+		WHERE delivery.member_id = #{memberId} AND order_id=#{orderId}
+		
+	</select>
+	
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountAll"
+		parameterType="com.spring.wtm.model.Delivery"
+		resultType="int">
+		
+		SELECT COUNT(*) FROM delivery
+		
+	</select>
+	
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem" 
+		parameterType="com.spring.wtm.model.Delivery"
+		useGeneratedKeys="true"
+		keyProperty="id">
+		
+		<if test="memo != null">
+		INSERT INTO delivery ( 
+				id, receiver, tel, postcode, address, detail_address, extra_address, memo, order_pay, reg_date, edit_date, member_id, order_id
+		)	VALUES	(
+				#{id}, #{receiver}, #{tel}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{memo}, #{orderPay}, now(), now(), #{memberId}, #{orderId}
+		)
+		</if>
+		<if test="memo == null">
+		INSERT INTO delivery ( 
+				id, receiver, tel, postcode, address, detail_address, extra_address, order_pay, reg_date, edit_date, member_id, order_id
+		)	VALUES	(
+				#{id}, #{receiver}, #{tel}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{orderPay}, now(), now(), #{memberId}, #{orderId}
+		)
+		</if>
+		
+	</insert>
+	
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="com.spring.wtm.model.Delivery">
+		
+		DELETE FROM delivery WHERE member_id=#{memberId} AND order_id=#{orderId}
+			
+	</delete>
+	
+</mapper>

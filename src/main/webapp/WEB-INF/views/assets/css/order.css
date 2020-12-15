@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+/**
+* @filename : order.css
+* @description : --- 주문 페이지(order.jsp)의 CSS ---
+* @author : 이 상 희(46wendy@naver.com)
+*/
+
+	a:hover {
+        text-decoration: none;
+        border: 0px;
+    }
+    
+    a:active {
+    	text-decoration: none;
+    	border: 0px;
+    }
+
+    .contents_header {
+    	padding-bottom: 9px;
+    	margin: 20px 0 27px;
+    	border-bottom: 1px solid #eee;
+    }
+    
+    .order_img {
+		padding-bottom: 15px;
+	}    
+
+	.order-title {
+		display: inline-block;
+	}  
+	
+	.myform {
+		display: inline-block;
+	}
+
+	.dropdown {
+		height: 34px;
+		border-radius: 4px;
+		border: 1px solid #ccc;
+		width: 110px;
+	}	
+    
+    .order_num {
+    	padding-left: 70px;
+    }
+
+    .order_name {
+   	 	width:800px;
+   		height:50px;
+    	color: #000;
+    	padding-top: 5px;
+    	padding-left: 20px;
+    	border-bottom: 1px solid #eee;
+    	background-color: #e8f0fa;
+    	border-radius: 20px 20px 0 0;
+    }
+    
+    .order_name_text {
+    	width: 720px;
+    	height: 60px;
+    	display: inline-block;
+    	color: #000;
+    }
+    
+    .fa-chevron-right {
+    	width: 30px;
+    	height: 60px;
+    	display: inline-block;
+    	color: #2E9AFE;
+    	padding-left:20px;
+    	padding-top: 10px;
+    }
+    
+    ul.order-item {
+    	border: solid 1px #eeeeee; 
+    	list-style: none;
+    	width: 800px;
+    	margin: auto;
+    	border-radius: 20px;
+    }
+    
+    .thumb {
+    	width:100px;
+    	height:120px;
+    	float:left;
+   		padding: 10px;
+   		padding-left: 25px;
+   		padding-top: 10px; 
+    }
+    
+    .order_info {
+    	padding-top: 20px;
+    }
+    
+    .order_info:after {
+    	content: '';
+    	display: block;
+    	float: none;
+    	clear: both;
+    }
+        
+    .order_desc {
+    	width: 500px;
+    	height: 120px;
+    	float: left;
+    	padding-top: 20px;
+    	padding-left: 35px;
+    	margin-bottom: 20px;
+    }
+    
+    .order_desc dl {
+     	margin-bottom: 10px;
+     }
+     
+    .order_desc dt {
+    	display: inline-block;
+    }
+    
+    .order_desc dd {
+    	display:inline-block;
+    }
+    
+    nav {
+        text-align: center;
+    }    

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdMapper">
+	
+	<!--  Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다.-->
+	<resultMap id="adMap" type="com.spring.wtm.model.Ad">	
+		<result property="adid" column="adid" />
+		<result property="adname" column="adname" />
+		<result property="adstart" column="adstart" />
+		<result property="adend" column="adend" />
+		<result property="adimg" column="adimg" />
+		<result property="adlink" column="adlink" />
+		<result property="adorder" column="adorder" />
+		<result property="reg_date" column="reg_date" />
+		<result property="edit_date" column="edit_date" />
+	</resultMap>
+	
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem" parameterType="com.spring.wtm.model.Ad" resultMap="adMap">
+		SELECT adid, adname, adstart, adend, adimg, adlink, adorder, reg_date, edit_date 
+		FROM ad WHERE adid=#{adid};
+	</select>
+	
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList" parameterType="com.spring.wtm.model.Ad" resultMap="adMap">
+		SELECT adid, adname, adstart, adend, adimg, adlink, adorder, reg_date, edit_date FROM ad
+	</select>
+	
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem" parameterType="com.spring.wtm.model.Ad" 
+		useGeneratedKeys="true" keyProperty="adid">
+		INSERT INTO ad (adname, adstart, adend, adimg, adlink, adorder
+		) VALUES (#{adname}, #{adstart}, #{adend}, #{adimg}, #{adlink}, #{adorder});
+	</insert>
+	
+</mapper>

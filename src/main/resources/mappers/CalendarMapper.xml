@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CalendarMapper">
+    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+    <resultMap id="calendarMap" type="com.spring.wtm.model.Calendar">
+        <!-- , IS NOT NULL, PRI -->
+        <result property="Id" column="_id" />
+        <!-- 일정 제목, IS NULL -->
+        <result property="title" column="title" />
+        <!-- 간결한 요약, IS NULL -->
+        <result property="description" column="description" />
+        <!-- , IS NULL -->
+        <result property="start" column="start" />
+        <!-- , IS NULL -->
+        <result property="end" column="end" />
+        <!-- , IS NULL -->
+        <result property="type" column="type" />
+        <!-- 게시자, IS NULL -->
+        <result property="typename" column="typename" />
+        <!-- 일정 색상, IS NULL -->
+        <result property="backgroundcolor" column="backgroundcolor" />
+        <!-- 검정색, IS NULL -->
+        <result property="textColor" column="textColor" />
+        <!-- 하루종일 여부, IS NULL -->
+        <result property="allDay" column="allDay" />
+        <!-- 회원일련번호, IS NULL -->
+        <result property="mid" column="mid" />
+    </resultMap>
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem" parameterType="com.spring.wtm.model.Calendar" resultMap="calendarMap">
+        SELECT _id, title, description, start, end, type, typename, backgroundcolor, textColor, allDay FROM calendar WHERE _id=#{Id}
+    </select>
+
+    <!-- 다중행 조회를 위한 기능 정의
+    사용자가 추가한 일정과 병원 예약내역을 한번에 보여준다.
+    예약 시간이 지난 일정과 시간이 아직 남은 일정은 색상으로 구분한다. -->
+    <select id="selectList" parameterType="com.spring.wtm.model.Calendar" resultMap="calendarMap">
+		SELECT * FROM calendar WHERE mid=#{mid}
+        UNION SELECT 
+		    reserve_id AS `_id`, CONCAT('[예약] ', hospital.name) AS title, ' ' AS `description`,
+		    CONCAT(re_date, ' ', re_time) AS `start`, 
+		    CONCAT(re_date, ' ', SUBSTRING_INDEX(SUBSTRING_INDEX(re_time, ':', 1), ',', -1), ':30') AS `end`,
+		    '병원 예약' AS `type`, 1 AS typename,
+		    '#f06595' AS backgroundcolor, '#ffffff' AS textColor, 0 AS allDay, member_id AS mid
+		FROM
+		    reserve
+		        INNER JOIN
+		    `member` ON reserve.member_id = `member`.id
+		        INNER JOIN
+		    hospital ON reserve.hospital_hospital_id = hospital.hospital_id
+		WHERE member_id=#{mid}
+		AND CONCAT(re_date, ' ', re_time) <![CDATA[>=]]> now()
+        UNION SELECT 
+		    reserve_id AS `_id`, CONCAT('[예약] ', hospital.name) AS title, ' ' AS `description`,
+		    CONCAT(re_date, ' ', re_time) AS `start`, 
+		    CONCAT(re_date, ' ', SUBSTRING_INDEX(SUBSTRING_INDEX(re_time, ':', 1), ',', -1), ':30') AS `end`,
+		    '병원 예약' AS `type`, 1 AS typename,
+		    'grey' AS backgroundcolor, '#ffffff' AS textColor, 0 AS allDay, member_id AS mid
+		FROM
+		    reserve
+		        INNER JOIN
+		    `member` ON reserve.member_id = `member`.id
+		        INNER JOIN
+		    hospital ON reserve.hospital_hospital_id = hospital.hospital_id
+		WHERE member_id=#{mid}
+		AND CONCAT(re_date, ' ', re_time) <![CDATA[<]]> now()
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 데이터 수 조회를 위한 기능 정의 -->
+    <select id="selectCountAll" parameterType="com.spring.wtm.model.Calendar" resultType="int">
+        SELECT COUNT(*) FROM calendar
+        <where>
+        	<if test="mid != null and mid != ''">
+        		mid=#{mid}
+        	</if>       	
+        </where>
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem" parameterType="com.spring.wtm.model.Calendar" useGeneratedKeys="true" keyProperty="Id">
+        INSERT INTO calendar (
+            title, description, start, end, type, backgroundcolor, mid
+        ) VALUES (
+            #{title}, #{description}, #{start}, #{end}, #{type}, #{backgroundcolor}, #{mid}
+        )
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem" parameterType="com.spring.wtm.model.Calendar">
+        DELETE FROM calendar WHERE _id=#{Id}
+    </delete>
+
+</mapper>

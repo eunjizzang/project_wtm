@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReserveMapper">
+    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+    <resultMap id="reserveMap" type="com.spring.wtm.model.Reserve">
+        <!-- , IS NULL, MUL -->
+        <result property="hospitalHospitalId" column="hospital_hospital_id" />
+        <!-- , IS NULL, MUL -->
+        <result property="memberId" column="member_id" />
+        <!-- , IS NOT NULL -->
+        <result property="reDate" column="re_date" />
+        <!-- , IS NOT NULL -->
+        <result property="reName" column="re_name" />
+        <!-- , IS NOT NULL -->
+        <result property="reTel" column="re_tel" />
+        <!-- , IS NOT NULL -->
+        <result property="reTime" column="re_time" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="reserveId" column="reserve_id" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="name" column="name" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="lat" column="lat" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="lon" column="lon" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="phone" column="phone" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="addr" column="addr" />
+    </resultMap>
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem" parameterType="com.spring.wtm.model.Reserve" resultMap="reserveMap">
+        SELECT hospital_hospital_id, member_id, re_date, re_name, re_tel, re_time, reserve_id FROM reserve WHERE reserve_id=#{reserveId}
+    </select>
+    
+     <select id="selectItem2" parameterType="com.spring.wtm.model.Reserve" resultMap="reserveMap">
+		SELECT hospital_hospital_id, member_id, re_date, re_name, re_tel, re_time, reserve_id, `name`, lat, lon, phone, addr
+		FROM reserve 
+		INNER JOIN `member` ON reserve.member_id = `member`.id
+		INNER JOIN hospital ON reserve.hospital_hospital_id = hospital.hospital_id
+		WHERE member_id = #{memberId} AND reserve_id = #{reserveId};
+	</select>
+	
+	<select id="selectItem3" parameterType="com.spring.wtm.model.Reserve" resultMap="reserveMap">
+		SELECT hospital_hospital_id, member_id, re_date, re_name, re_tel, re_time, reserve_id, `name`, lat, lon, phone, addr
+		FROM reserve 
+		INNER JOIN `member` ON reserve.member_id = `member`.id
+		INNER JOIN hospital ON reserve.hospital_hospital_id = hospital.hospital_id
+		WHERE member_id = #{memberId}
+		ORDER BY reserve_id DESC 
+		Limit 0,1;
+	</select>
+	
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList" parameterType="com.spring.wtm.model.Reserve" resultMap="reserveMap">
+        SELECT hospital_hospital_id, member_id, re_date, re_name, re_tel, re_time, reserve_id FROM reserve
+        ORDER BY reserve_id DESC
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+	
+	<!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList2" parameterType="com.spring.wtm.model.Reserve" resultMap="reserveMap">
+        SELECT hospital_hospital_id, member_id, re_date, re_name, re_tel, re_time, reserve_id, `name`
+        FROM reserve
+        INNER JOIN `member` ON reserve.member_id = `member`.id
+		INNER JOIN hospital ON reserve.hospital_hospital_id = hospital.hospital_id
+		WHERE member_id = #{memberId}
+        ORDER BY reserve_id DESC
+        
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+    
+    <!-- 데이터 수 조회를 위한 기능 정의 -->
+    <select id="selectCountAll" parameterType="com.spring.wtm.model.Reserve" resultType="int">
+        SELECT COUNT(*) FROM reserve
+        WHERE member_id = #{memberId}
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem" parameterType="com.spring.wtm.model.Reserve" useGeneratedKeys="true" keyProperty="reserveId">
+        INSERT INTO reserve (
+            hospital_hospital_id, member_id, re_date, re_name, re_tel, re_time
+        ) VALUES (
+            #{hospitalHospitalId}, #{memberId}, #{reDate}, #{reName}, #{reTel}, #{reTime}
+        )
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem" parameterType="com.spring.wtm.model.Reserve">
+        DELETE FROM reserve WHERE reserve_id=#{reserveId}
+    </delete>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem" parameterType="com.spring.wtm.model.Reserve">
+        UPDATE reserve SET 
+            hospital_hospital_id=#{hospitalHospitalId},
+            member_id=#{memberId},
+            re_date=#{reDate},
+            re_name=#{reName},
+            re_tel=#{reTel},
+            re_time=#{reTime},
+        WHERE reserve_id=#{reserveId}
+    </update>
+
+</mapper>

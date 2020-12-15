@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+/**
+* @filename : shop-detail.css
+* @description : --- 쇼핑몰 상세 페이지(shop-detail.jsp)의 CSS ---
+* @author : 이상희(46wendy@naver.com)
+*/
+
+    dl.product-price {
+        margin-top: 20px;
+    }
+
+    .product-option-qty {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        background-color: #fff;
+        border: 0px;
+    }
+	
+	a {
+		text-decoration: none;
+	}
+	
+	a:hover {
+		text-decoration: none;
+	}
+	
+	/** 수량 텍스트창 흰색 배경 **/
+	.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    	background-color: #fff;
+	}
+	
+	.img_content_detail {
+		margin-left: 120px;
+		width: 700px;
+	}
+	
+    .btn_order {
+        margin-bottom: 10px;
+        background-color: #2E9AFE;
+        border: 0px;
+        color: #fff;
+    }
+
+    .btn_order a {
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    .btn_order:hover {
+        color: #fff;
+        background-color: #337ab7;
+    }
+
+    .btn_write:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .btn_cart a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .btn_cart a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .spec_table {
+        font-weight: 500;
+        vertical-align: middle;
+        padding: 5px 7px 4px 11px;
+        line-height: 160%;
+    }
+    
+    .content_delivery {
+    	padding-left: 10px;
+    }
+    
+    .delivery_info {
+    	margin-bottom: 30px;
+    }

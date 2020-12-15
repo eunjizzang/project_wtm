@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+/**
+* @filename : map.css
+* @description : --- 병원 & 약국찾기 공통 CSS ---
+* @author : 이상희(46wendy@naver.com)
+*/
+    
+    /**  검색돋보기 커서 포인트 **/
+    .input-group-addon:hover {
+       cursor:pointer;
+    }
+	
+	/** 겁색 돋보기 테두리 */
+	.btn-success {
+		border-radius: 4px;
+	}
+	
+	/** 양쪽 여백줘서 맞추고 밑에 footer와 간격주기 **/
+	.map_contents {
+		padding-left: 25px;
+		padding-right: 10px;
+		float:left;
+		margin-bottom: 60px;
+	}
+	
+	/** map 높이와 맞추기 & 스크롤바 **/
+	.list_contents {
+		height: 770px;
+		float: left;
+		overflow: auto;
+	}
+	
+	/** h4에 걸린 margin 없애기 텍스트 정렬 **/
+	h4 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		text-align: center;
+	}
+	
+	/** 약국 & 병원리스트 박스에 배경, 넓이, 간격, 경계선 **/
+	.list_item {
+		background-color: #cde8fa;
+		width: 230px;
+		margin-bottom: 5px;
+		border: 1px solid #d5d5d5;
+	}
+	
+	/** 약국 & 병원리스트 링크 **/
+	.list_item a {
+		text-decoration: none;
+		padding: 5px;
+		width: auto;
+		display: block;
+	}
+	
+	/** 약국 & 병원리스트 박스 안에 주소와 시간 위에 간격주기 **/
+	.list_item span {
+		margin-top: 15px;
+		color: #000;
+	}
+	
+	/** 약국 & 병원 & 병원 상세정보 **/
+	.content {
+		font-size: 13px;
+		padding-bottom: 15px;
+		border: 1px solid #d5d5d5;
+		border-top: none;
+		padding-left: 10px;
+		padding-right: 10px;
+		background-color: #fff;
+	}
+	
+	/** a링크에 걸린 padding 없애기 **/
+	.content > a {
+		padding: 0px;
+	}
+	
+	/* 제목 영역의 링크에 대한 크기, 글자모양 */
+   .list_title a {
+		display: block; 
+		width: auto;
+        text-decoration: none;
+	}    

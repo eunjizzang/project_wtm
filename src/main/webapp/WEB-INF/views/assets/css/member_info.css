@@ -1,0 +1,20 @@
+/**
+	회원 가입, 회원 정보 수정 페이지에 공통적으로 적용될 css
+*/
+
+/* 전체 입력폼 크기 */
+#join_form>.form-group input { height: 40px; }
+
+/* 우편번호 검색 버튼의 둥글기, 높이 */
+.postcode-finder {
+	border-radius: 0 4px 4px 0;
+	height: 40px;
+}
+
+/* 알림창 텍스트에 적용될 스타일 */
+.postcode-info-text {
+	font-family: 'NanumGothic', sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+

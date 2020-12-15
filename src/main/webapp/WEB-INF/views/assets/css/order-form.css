@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/**
+* @filename : order-form.css
+* @description : --- 주문서 작성 페이지(order-form.jsp)의 CSS ---
+* @author : 이 상 희(46wendy@naver.com)
+*/
+
+	.page-header {
+    	margin-bottom: 0;
+    }
+    
+    .pen_img {
+		padding-bottom: 15px;
+		padding-right: 0;
+	}
+	
+    .total {
+        text-align: right;
+    }
+    
+    .page-header {
+    	margin-bottom: 0;
+    	border-bottom: 0;
+    }
+    
+	.item_img {
+    	padding-left: 10px;
+    } 
+    
+	a:hover {
+        text-decoration: none;
+    }    
+    
+    /** 테이블 행 높이 정렬 중앙 맞춤 **/
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		vertical-align: middle;
+	}    
+	
+	.form-horizontal .form-group {
+		margin: 0;
+		margin-left: 15px;
+	}
+	
+	.left_right {
+		height: 870px;
+	}
+	
+	.left {
+		float: left;
+		width: 70%;
+	}
+	
+	.right {
+		float: left;
+		width: 30%;
+	}
+	
+	.left_right:after {
+		content: "";
+		display: block;
+		clear: both;
+		float: none;
+	}
+
+	.pay_box {
+		background-color: #f0f4f769;
+		width: 243px;
+		height: 200px;
+		margin-left: 40px;
+	}
+	
+	.pay_box_text {
+		margin-left: 40px;
+		padding-top: 40px;
+	}
+	
+	.pay-price {
+		margin-left: 40px;
+	}
+		
+    .btn-order {
+    	color: #fff;
+    	border: 0;
+    	width: 180px;
+    	height: 40px;
+    	margin-top: 20px;
+    	margin-left: 31px;
+    	font-size: 20px;
+    }
+    
+    .btn-order a {
+        text-decoration: none;
+        color: #fff;
+    }	
+	
+	/** label과 input 창 나란히 **/
+	.form-control {
+		display: inline-block;
+		width: 200px;
+	}
+	
+	legend {
+		display: inline-block;
+	}
+	
+	.h3_check {
+		display: inline-block;
+	}
+	
+	/** readonly 텍스트창 흰색 배경 **/
+	.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    	background-color: #fff;
+	}	
+
+	.input-group {
+		display: inline-block;
+	}    	
+	
+	.naran {
+		display: inline-block;
+	}
+
+	.findAdd5 {
+		width: 400px;
+	}
+	
+	.payment_info {
+		background-color: #f0f4f769;
+	}
+	
+	.payment_info_list {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}

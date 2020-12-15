@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HospitalMapper">
+    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+    <resultMap id="hospitalMap" type="com.spring.wtm.model.Hospital">
+        <!-- , IS NULL -->
+        <result property="addr" column="addr" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="fri_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="fri_open" />
+        <!-- , IS NOT NULL, PRI -->
+        <result property="hospitalId" column="hospital_id" />
+        <!-- , IS NULL -->
+        <result property="lat" column="lat" />
+        <!-- , IS NULL -->
+        <result property="lon" column="lon" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="mon_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="mon_open" />
+        <!-- , IS NULL -->
+        <result property="name" column="name" />
+        <!-- , IS NULL -->
+        <result property="phone" column="phone" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="sat_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="sat_open" />
+        <!-- , IS NULL -->
+        <result property="site" column="site" />
+        <!-- , IS NULL -->
+        <result property="sub" column="sub" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="sun_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="sun_open" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="thur_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="thur_open" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="tue_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="tue_open" />
+        <!-- , IS NULL -->
+        <result property="closeTime" column="wen_close" />
+        <!-- , IS NULL -->
+        <result property="openTime" column="wen_open" />
+    </resultMap>
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem" parameterType="com.spring.wtm.model.Hospital" resultMap="hospitalMap">
+        SELECT hospital_id, name FROM hospital WHERE hospital_id=#{hospitalId}
+    </select>
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList" parameterType="com.spring.wtm.model.Hospital" resultMap="hospitalMap">
+        SELECT addr, fri_close, fri_open, hospital_id, lat, lon, mon_close, mon_open, name, phone, sat_close, sat_open, site, sub, sun_close, sun_open, thur_close, thur_open, tue_close, tue_open, wen_close, wen_open 
+        FROM hospital
+        
+        <where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+       
+        ORDER BY hospital_id DESC
+    </select>
+
+	<!-- 일요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList1"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`, site, sub, sun_open, sun_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+       
+       ORDER BY hospital_id DESC
+	</select>
+	
+	<!-- 월요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList2"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`, site, sub, mon_open, mon_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY hospital_id DESC
+	</select>
+	
+	<!-- 화요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList3"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`, site, sub, tue_open, tue_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY hospital_id DESC	
+	</select>
+	
+	<!-- 수요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList4"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`,  site, sub, wen_open, wen_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY hospital_id DESC
+	</select>
+	
+	<!-- 목요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList5"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`, site, sub, thur_open, thur_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY hospital_id DESC
+	</select>
+	
+	<!-- 금요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList6"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`, site, sub, fri_open, fri_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY hospital_id DESC
+	</select>
+	
+	<!-- 토요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList7"
+		parameterType="com.spring.wtm.model.Hospital"
+		resultMap="hospitalMap">
+	
+		SELECT hospital_id, `name`, phone, `addr`, site, sub, sat_open, sat_close, `lon`, `lat`
+		FROM hospital
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY hospital_id DESC
+	</select>
+
+    <!-- 데이터 수 조회를 위한 기능 정의 -->
+    <select id="selectCountAll" parameterType="com.spring.wtm.model.Hospital" resultType="int">
+        SELECT COUNT(*) FROM hospital
+        
+        <where>
+			<if test="addr != null and addr != ''">
+	        	sub LIKE #{sub} AND addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem" parameterType="com.spring.wtm.model.Hospital" useGeneratedKeys="true" keyProperty="hospital_id">
+        INSERT INTO hospital (
+            addr, fri_close, fri_open, lat, lon, mon_close, mon_open, name, phone, sat_close, sat_open, site, sub, sun_close, sun_open, thur_close, thur_open, tue_close, tue_open, wen_close, wen_open
+        ) VALUES (
+            #{addr}, #{friClose}, #{friOpen}, #{lat}, #{lon}, #{monClose}, #{monOpen}, #{name}, #{phone}, #{satClose}, #{satOpen}, #{site}, #{sub}, #{sunClose}, #{sunOpen}, #{thurClose}, #{thurOpen}, #{tueClose}, #{tueOpen}, #{wenClose}, #{wenOpen}
+        )
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem" parameterType="com.spring.wtm.model.Hospital">
+        DELETE FROM hospital WHERE hospital_id=#{hospitalId}
+    </delete>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem" parameterType="com.spring.wtm.model.Hospital">
+        UPDATE hospital SET 
+            addr=#{addr},
+            fri_close=#{friClose},
+            fri_open=#{friOpen},
+            lat=#{lat},
+            lon=#{lon},
+            mon_close=#{monClose},
+            mon_open=#{monOpen},
+            name=#{name},
+            phone=#{phone},
+            sat_close=#{satClose},
+            sat_open=#{satOpen},
+            site=#{site},
+            sub=#{sub},
+            sun_close=#{sunClose},
+            sun_open=#{sunOpen},
+            thur_close=#{thurClose},
+            thur_open=#{thurOpen},
+            tue_close=#{tueClose},
+            tue_open=#{tueOpen},
+            wen_close=#{wenClose},
+            wen_open=#{wenOpen}
+        WHERE hospital_id=#{hospitalId}
+    </update>
+
+</mapper>

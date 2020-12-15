@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DrugMapper">
+
+	<!--  Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다.-->
+	<resultMap id="drugMap" type="com.spring.wtm.model.Drug">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="addr" column="addr" />
+		<result property="openTime" column="mon_open" />
+		<result property="closeTime" column="mon_close" />
+		<result property="openTime" column="tue_open" />
+		<result property="closeTime" column="tue_close" />
+		<result property="openTime" column="wen_open" />
+		<result property="closeTime" column="wen_close" />
+		<result property="openTime" column="thur_open" />
+		<result property="closeTime" column="thur_close" />
+		<result property="openTime" column="fri_open" />
+		<result property="closeTime" column="fri_close" />
+		<result property="openTime" column="sat_open" />
+		<result property="closeTime" column="sat_close" />
+		<result property="openTime" column="sun_open" />
+		<result property="closeTime" column="sun_close" />
+		<result property="holiOpen" column="holi_open" />
+		<result property="holiClose" column="holi_close" />
+		<result property="lon" column="lon" />
+		<result property="lat" column="lat" />
+	</resultMap>
+	
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem" 
+		parameterType="com.spring.wtm.model.Drug" 
+		resultMap="drugMap">
+		
+		SELECT id, `name`, phone, `addr`, mon_open, mon_close, tue_open, tue_close, wen_open, wen_close, thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close,  holi_open, holi_close, `lon`, `lat`
+		FROM drug
+		
+	</select>
+		
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, mon_open, mon_close, tue_open, tue_close, wen_open, wen_close, thur_open, thur_close, fri_open, fri_close, sat_open, sat_close, sun_open, sun_close,  holi_open, holi_close, `lon`, `lat`
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 일요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList1"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, sun_open, sun_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 월요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList2"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, mon_open, mon_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 화요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList3"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, tue_open, tue_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 수요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList4"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`,  wen_open, wen_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 목요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList5"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, thur_open, thur_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 금요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList6"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, fri_open, fri_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 토요일 - 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList7"
+		parameterType="com.spring.wtm.model.Drug"
+		resultMap="drugMap">
+	
+		SELECT id, `name`, phone, `addr`, sat_open, sat_close, `lon`, `lat`, holi_open, holi_close
+		FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+		
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountAll"
+		parameterType="com.spring.wtm.model.Drug"
+		resultType="int">
+		
+		SELECT COUNT(*) FROM drug
+		
+		<where>
+			<if test="addr != null and addr != ''">
+	                addr LIKE concat('%', #{addr}, '%') AND  addr LIKE concat('%', #{addr2}, '%') AND  addr LIKE concat('%', #{addr3}, '%') 
+			</if>
+       </where>
+	
+		ORDER BY id DESC	
+	</select>
+	
+</mapper>

@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/**
+* @filename : shop.css
+* @description : --- 쇼핑몰 메인 페이지(shop.jsp)의 CSS ---
+* @author : 이 상 희(46wendy@naver.com)
+*/
+
+	.contents {
+	     margin-top: 40px;
+    }
+ 
+ 	.btn-primary {
+ 		background-color: #2E9AFE;
+ 		border: 0;
+ 	}
+ 	
+    .search {
+        padding-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    div.input-group {
+    	padding-top: 10px;
+    	margin-bottom: 30px;
+    	width: 940px;
+    }
+    
+    .input-group-addon:hover {
+    	cursor:pointer;
+    }    
+
+    .product-item .img {
+	    display: block;
+	    height: 300px;
+	    background-position: center center;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    height: 300px;
+    }
+
+    .product-item {
+	    margin-bottom: 25px;
+    }
+
+    .product-list a {
+	    color: #222;
+	    display: block;
+	    padding-bottom: 15px;
+    }
+
+    .product-list a:hover {
+	    text-decoration: none;
+		box-shadow: 0px 0px 10px #a4aab0;
+    }
+
+    .product-list h4 {
+        font-size: 16px;
+        color: #000;
+        font-weight: normal;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+
+    .product-list .price {
+        font-size: 17px;
+        color: #265f94;
+    }
+
+    nav {
+        text-align: center;
+        margin-bottom: 30px;
+    }    

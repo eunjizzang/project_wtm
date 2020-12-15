@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/**
+* @filename : order-complete.css
+* @description : --- 주문 완료 페이지(order-complete.jsp)의 CSS ---
+* @author : 이 상 희(46wendy@naver.com)
+*/
+
+	.com_box {
+		height: 200px;
+		margin-top: 150px;
+		margin-left: 120px;
+	}
+		
+	.img_box {
+		float: left;
+		width: 30%;
+	}
+	
+	.tick_img {
+		width: 170px;
+	}
+	
+	.text_box {
+		float: left;
+		width: 70%;	
+		padding-top: 15px;
+	}
+		
+	.two_btn {
+		margin-left: 535px;
+	}
+
+    a:hover {
+        text-decoration: none;
+    }
+	    
+    a:active {
+    	text-decoration: none;
+    }
+    
+    .btn-order {
+        background-color: #2E9AFE;
+        border: 0px;
+        color: #fff;	    
+        height: 34px;	
+    }
+	
+    .btn-order a {
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    .btn-order:hover {
+        color: #fff;
+        background-color: #337ab7;
+    }		

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderMapper">
+
+	<!--  Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다.-->
+	<resultMap id="orderMap" type="com.spring.wtm.model.Order">
+		<result property="id" column="id" />
+		<result property="totalPrice" column="total_price" />
+		<result property="status" column="status" />
+		<result property="orderDate" column="order_date" />
+		<result property="editDate" column="edit_date" />
+		<result property="prodInfoJson" column="prod_info" />
+		<result property="memberId" column="member_id" />
+		<result property="productId" column="product_id" />
+		<result property="count" column="count" />
+	</resultMap>
+	
+	<!-- 단일행 조회를 위한 기능 정의1 = order-complete.jsp -->
+	<select id="selectItem" 
+		parameterType="com.spring.wtm.model.Order" 
+		resultMap="orderMap">
+		
+		SELECT `order`.id, `prod_info`, total_price, status, order_date, `order`.edit_date, member_id
+		FROM `order`
+		WHERE member_id = #{memberId} 
+		ORDER BY id DESC
+		LIMIT 0, 1
+		
+	</select>
+		
+	<!-- 단일행 조회를 위한 기능 정의2 = order-detail.jsp-->
+	<select id="selectItem2"
+		parameterType="com.spring.wtm.model.Order"
+		resultMap="orderMap">
+	
+		SELECT `order`.id, `prod_info`, total_price, status, DATE_FORMAT(order_date, '%Y-%m-%d') AS order_date, `order`.edit_date, member_id, count
+		FROM `order`
+		WHERE member_id = #{memberId} AND id = #{id}
+		ORDER BY id DESC
+		
+	</select>
+	
+	<!-- 다중행 조회를 위한 기능 정의 = 드롭다운 기간별 조회 -->
+	<select id="selectList"
+		parameterType="com.spring.wtm.model.Order"
+		resultMap="orderMap">
+	
+		SELECT `order`.id, `prod_info`, total_price, status, order_date, `order`.edit_date, member_id, count
+		FROM `order`
+		WHERE member_id = #{memberId} 
+		
+		<choose>
+			<when test="orderDate == null || orderDate ==''">
+			</when>
+			
+			<when test="orderDate == '일주일'">
+			 	AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 1 WEEK) AND now()
+			 </when>
+			 
+			 <when test="orderDate == '한달'">
+			 	AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 1 MONTH ) AND now()
+			 </when>
+			 
+			 <when test="orderDate == '6개월'">
+				AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 6 MONTH) AND now()
+			 </when>
+			 
+			 <when test="orderDate == '1년'">
+			 	AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 1 YEAR) AND now()
+			 </when>
+			 
+			 <when test="orderDate == '3년'">
+			 	AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 3 YEAR) AND now()
+			 </when>
+		 </choose>
+		 
+		ORDER BY id DESC
+		
+		<if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+		
+	</select>
+	
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountAll"
+		parameterType="com.spring.wtm.model.Order"
+		resultType="int">
+		
+		SELECT COUNT(*) 
+		FROM `order`
+		WHERE member_id = #{memberId} 
+		
+		<choose>
+			<when test="orderDate == null || orderDate ==''">
+			</when>
+				
+			<when test="orderDate == '일주일'">
+			 	AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 1 WEEK) AND now()
+			</when>
+				 
+			<when test="orderDate == '한달'">
+				 AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 1 MONTH ) AND now()
+			</when>
+				 
+			<when test="orderDate == '6개월'">
+				AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 6 MONTH) AND now()
+			</when>
+				 
+			<when test="orderDate == '1년'">
+				AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 1 YEAR) AND now()
+			</when>
+				 
+			<when test="orderDate == '3년'">
+				AND order_date BETWEEN DATE_ADD(now(),INTERVAL - 3 YEAR) AND now()
+			</when>
+		</choose>
+		
+	</select>
+	
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem" 
+		parameterType="com.spring.wtm.model.Order"
+		useGeneratedKeys="true"
+		keyProperty="id">
+		
+		INSERT INTO `order` ( 
+				id, `prod_info`, total_price, status, order_date, edit_date, member_id, count
+		)	VALUES	(
+				#{id}, #{prodInfoJson}, #{totalPrice}, "결제완료", now(), now(), #{memberId}, #{count}
+		)
+	
+	</insert>
+	
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="com.spring.wtm.model.Order">
+		
+		DELETE FROM `order` WHERE member_id=#{memberId} AND id=#{id}
+			
+	</delete>
+	
+</mapper>

@@ -1,0 +1,67 @@
+    /* 이거머약 사이트 전체 폰트 적용 */
+    * {
+        font-family: 'NanumGothic', sans-serif;
+    }
+
+    /* 헤더 탑 스타일 적용 */
+    .header-top {
+        background: #2E9AFE;
+        height: 30px;
+        padding-top: 5px;
+    }
+
+    /* 헤더 탑 텍스트 */
+    .header-top a {
+        font-weight: bold;
+        color: #eee;
+    }
+
+    .header-navi {
+        margin-top: 10px;
+    }
+
+    /* 헤더 네비 목록 정의 초기화 */
+    .header-navi li {
+        padding-top: 75px;
+        width: 12%;
+        display: inline-block;
+    }
+
+    /* 헤더 네비 메뉴 스타일 적용 */
+    .header-navi li>a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+        color: #333;
+        /* 링크의 박스화 */
+        display: block;
+    }
+
+    /* 헤더 네비 메뉴에 마우스를 올릴 경우 적용될 애니메이션 */
+    .header-navi li>a:hover {
+        color: #2E9AFE;
+        border-bottom: 1px solid #2E9AFE;
+        /* 0.1초후 실행*/
+        transition-delay: 0.1s;
+        transition-timing-function: linear;
+        height: 28px;
+    }
+    
+    .header-navi a img {
+    	float: left;
+    }
+
+    /* footer 스타일 설정 */
+    .footer {
+        height: auto;
+        background-color: #FAFAFA;
+    }
+
+    .footer .footer-info {
+        float: left;
+        margin: 30px;
+    }
+
+    footer {
+        font-size: 10px;
+    }

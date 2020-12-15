@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/**
+* @filename : cart.css
+* @description : --- 장바구니 페이지(cart.jsp)의 CSS ---
+* @author : 이 상 희(46wendy@naver.com)
+*/
+
+	.page-header {
+    	margin-bottom: 0;
+    }
+    
+    .cart_img {
+    	vertical-align: middle;
+		padding-bottom: 15px;
+		padding-right: 0;
+	}
+    
+    /** 테이블 행 높이 정렬 중앙 맞춤 **/
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		vertical-align: middle;
+	}
+
+    .qty {
+    	padding-right: 0;
+    }
+    
+    .order-price {
+    	font-size: 20px;
+    }
+    
+    /** 수량 입력칸과 버튼들 사이 여백 없애줌 **/
+    .input-group-btn {
+    	width: 0;
+    }
+    
+	/** readonly 수량 텍스트창 흰색 배경 **/
+	.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    	background-color: #fff;
+	}
+    
+    .btn-order {
+    	background-color: #2E9AFE;
+    	color: #fff;
+    }
+    
+    .btn-order a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .btn-order:hover {
+        color: #fff;
+		background-color: #337ab7;
+    }
+    
+    .btn-delete {
+    	background-color: #fff;
+    	color: #d94e71;
+    }
+	
+	/** 기본 숨김 처리 **/
+	#show_btn {
+		display: none;
+	}
+
+	.btn-shop {
+		color: #fff;
+		width: 120px;
+		height: 50px;
+		font-size: 16px;
+		padding-left: 9px;
+		margin-top: 50px;
+	}
+	
+	.btn-shop a {
+        text-decoration: none;
+		color: #fff;
+	}    

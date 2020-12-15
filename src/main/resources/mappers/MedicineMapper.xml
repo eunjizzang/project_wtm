@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MedicineMapper">
+
+	<!-- Beans의 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="medicineMap"
+		type="com.spring.wtm.model.Medicine">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="itemSeq" column="item_seq" />
+		<result property="itemName" column="item_name" />
+		<result property="classNo" column="class_no" />
+		<result property="etcOtcName" column="etc_otc_name" />
+		<result property="entpName" column="entp_name" />
+		<result property="chart" column="chart" />
+		<result property="drugShape" column="drug_shape" />
+		<result property="color1" column="color1" />
+		<result property="color2" column="color2" />
+		<result property="line1" column="line1" />
+		<result property="line2" column="line2" />
+		<result property="validTerm" column="valid_term" />
+		<result property="formCode" column="form_code_name" />
+		<result property="drugImg" column="drug_img" />
+		<result property="storageMethod" column="storage_method" />
+		<result property="effectData" column="effect_data" />
+		<result property="usageData" column="usage_data" />
+
+
+	</resultMap>
+
+	<!-- 약 정보 조회 : 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="com.spring.wtm.model.Medicine" resultMap="medicineMap">
+		SELECT
+		item_seq, item_name, class_no, etc_otc_name, entp_name, chart,
+		drug_shape,valid_term,
+		color1, color2, line1, line2, form_code_name, drug_img, storage_method,
+		effect_data, usage_data
+		FROM medicine WHERE item_seq = #{itemSeq}
+	</select>
+
+
+	<!-- 약정보 조회 : 약이름으로 검색했을 때 결과 리스트 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="com.spring.wtm.model.Medicine" resultMap="medicineMap">
+		SELECT item_seq, item_name, class_no, etc_otc_name, entp_name, chart,
+		drug_shape, valid_term,
+		color1, color2, line1, line2, form_code_name, drug_img, storage_method,
+		effect_data, usage_data
+		FROM medicine
+
+ 		<where>
+
+			<if test='itemName != null and itemName != " "'>
+				item_name LIKE concat ('%', #{itemName}, '%')
+			</if>
+		</where> 
+
+
+		ORDER BY item_seq DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountAll"
+		parameterType="com.spring.wtm.model.Medicine" resultType="int">
+		SELECT COUNT(*)
+		FROM medicine
+
+		<where>
+			<if test="itemName != null and itemName != ''">
+				item_name LIKE concat('%', #{itemName}, '%')
+			</if>
+
+		</where>
+
+	</select>
+
+</mapper>
