@@ -1,3 +1,9 @@
+/**
+* @filename : MypageController.java
+* @description : --- 마이 페이지 Controller ---
+* @author : 정은지(ejzzang56@gmail.com)
+*/
+
 package com.spring.wtm.controllers;
 
 import java.io.IOException;

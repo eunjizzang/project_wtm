@@ -1,15 +1,9 @@
 <%
 	/**
-* @filename : hospital.jsp
-* @description : --- 병원 리스트 및 검색 페이지 ---
-		1) .search_contents (제목~검색 영역)
-		2) .map_contents (지도 영역)
-		3) .list_contents (병원리스트 영역)
-			-각 병원 블록: .list_item
-				-병원 이름 블록: .list_title
-				-병원 주소,번호,시간 블록: .content
-* @author : 이상희(46wendy@naver.com)
-*/
+ *@FileName : hospital.jsp
+ *@프로그램 설명  :	병원 리스트 및 검색 페이지
+ *@작성자 : 정은지 (ejzzang56@gmail.com)
+ */
 %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

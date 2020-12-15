@@ -1,3 +1,9 @@
+/**
+* @filename : ReserveRestController.java
+* @description : --- 병원 예약 Controller ---
+* @author : 정은지(ejzzang56@gmail.com)
+*/
+
 package com.spring.wtm.controllers;
 
 import java.util.Calendar;

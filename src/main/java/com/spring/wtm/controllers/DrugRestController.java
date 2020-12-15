@@ -1,7 +1,7 @@
 /**
 * @filename : DrugRestController.java
 * @description : --- 약국 찾기 Controller ---
-* @author : 이 상 희(46wendy@naver.com)
+* @author : 정은지(ejzzang56@gmail.com)
 */
 
 package com.spring.wtm.controllers;

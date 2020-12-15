@@ -1,15 +1,9 @@
 <%
-/**
-* @filename : drug.jsp
-* @description : --- 약국 리스트 및 검색 페이지 ---
-				1) .search_contents (제목~검색 영역)
-				2) .map_contents (지도 영역)
-				3) .list_contents (약국리스트 영역)
-					-각 약국 블록: .list_item
-						-약국 이름 블록: .list_title
-						-약국 주소,번호,시간 블록: .content
-* @author : 이 상 희(46wendy@naver.com)
-*/
+	/**
+ *@FileName : drug.jsp
+ *@프로그램 설명  :	약국 리스트 및 검색 페이지
+ *@작성자 : 정은지 (ejzzang56@gmail.com)
+ */
 %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

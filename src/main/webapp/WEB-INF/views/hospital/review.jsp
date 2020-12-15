@@ -1,6 +1,6 @@
 <%/**
  *@FileName : review.jsp
- *@프로그램 설명  : 병원 리뷰들을 볼 수 있다.
+ *@프로그램 설명  : 병원 리뷰 페이지
  *@작성자 : 정은지 (ejzzang56@gmail.com)
  */%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
